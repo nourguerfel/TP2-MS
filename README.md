@@ -3,7 +3,7 @@
 # TP2 — Service web « Calculatrice » avec JAX-RS et Tomcat
 
 > **Matière :** Architecture MicroServices  
-> **Environnement :** Java 17 · IntelliJ IDEA · Maven · Spring Framework  
+> **Environnement :** Java 17 · IntelliJ IDEA · Maven ·  Apache Tomcat  **10.1.61**  . JAX-RS 
 > **Compte rendu :** activités , observations, réponses aux questions et captures d'écran personnelles.
 > 
 > ## Sommaire
