@@ -32,56 +32,6 @@ Dans ce TP, nous développons un **service web REST** qui expose une calculatric
  
 Ce compte rendu couvre le test Hello World, puis les quatre calculs : **somme**, **soustraction**, **produit** et **division** (avec gestion de l'erreur de division par zéro), puis l'échange de données au format **JSON** (partie E), la ressource **operations** avec les verbes POST, GET, PUT et DELETE (partie F), et enfin les questions de synthèse.
  
-### Objectifs pédagogiques et où ils sont traités
- 
-| Objectif du TP | Traité dans |
-|---|---|
-| Concevoir une ressource REST : choisir ses URI et les verbes HTTP adaptés | [Partie A](#3-partie-a--conception-du-service) |
-| Créer un projet Maven de type application web (`.war`) | [Partie B](#4-partie-b--création-du-projet-maven) |
-| Écrire un service REST avec les annotations JAX-RS | [Hello World](#5-test-préliminaire--hello-world), [Parties C et D](#6-partie-c--premier-service-rest--la-somme) |
-| Déployer l'application dans Tomcat | [C.4 et C.5](#c4-construire-le-fichier-war) |
-| Échanger des données (texte brut, puis JSON) | [C.3](#c3-la-ressource-rest--classe-calculrest) et [Partie E](#8-partie-e--échanger-des-données-en-json) |
-| Tester un service avec curl et Postman et interpréter les codes de statut HTTP | [C.7](#c7-tester-le-service) et [D](#7-partie-d--soustraction-produit-et-division) |
- 
----
- 
-## 2. Environnement de travail
- 
-| Outil | Version utilisée |
-|---|---|
-| JDK | 17 ou supérieur |
-| Maven | 3.9+ (intégré à IntelliJ IDEA) |
-| Apache Tomcat | **10.1.61** |
-| IDE | IntelliJ IDEA |
-| Clients de test | Navigateur, curl, Postman |
- 
-> **Pourquoi Tomcat 10.1 ?** Le TP utilise les paquetages `jakarta.*` (Jakarta EE 10). Tomcat 9 et les versions antérieures utilisent les anciens paquetages `javax.*`, et l'application n'y démarrerait pas.
- 
----
- 
-## 3. Partie A : Conception du service
- 
-Avant de coder, on choisit les ressources, les URI et les verbes HTTP.
- 
-### Famille 1 : calculs directs (rien n'est enregistré sur le serveur)
- 
-| Verbe | URI | Rôle |
-|---|---|---|
-| GET | `/calcul/somme?a=2&b=3` | Retourne a + b |
-| GET | `/calcul/soustraction?a=2&b=3` | Retourne a − b |
-| GET | `/calcul/produit?a=2&b=3` | Retourne a × b |
-| GET | `/calcul/division?a=6&b=3` | Retourne a ÷ b |
- 
-### Famille 2 : historique des opérations (ressource `operations`)
- 
-| Verbe | URI | Rôle |
-|---|---|---|
-| POST | `/operations` | Crée une opération (calcul effectué et enregistré) |
-| GET | `/operations` | Retourne toutes les opérations |
-| GET | `/operations/{id}` | Retourne l'opération numéro id |
-| PUT | `/operations/{id}` | Modifie l'opération numéro id |
-| DELETE | `/operations/{id}` | Supprime l'opération numéro id |
- 
 ### Réponses aux questions de conception
  
 **1. Pourquoi les calculs directs utilisent-ils le verbe GET et non POST ?**
